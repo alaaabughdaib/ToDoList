@@ -1,0 +1,56 @@
+body {
+  background-image: url('../assets/images/taskpage.svg'); 
+  background-size: cover;
+
+}
+.tasks-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: left; 
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #fff !important;
+  font-weight: bold;
+  text-align: center; 
+  font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.task-list {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 20px; 
+  justify-content: flex-start; 
+}
+
+.add-task-button {
+  padding: 10px 20px;
+  background-color: #670664;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.add-task-button:hover {
+  background-color: #4a0448;
+}
+
+
+@media (max-width: 768px) {
+  .task-list {
+    justify-content: center; 
+  }
+}
+
+@media (max-width: 480px) {
+  .task-list {
+    flex-direction: column;
+  }
+}
