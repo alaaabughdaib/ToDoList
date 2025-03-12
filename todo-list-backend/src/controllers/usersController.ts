@@ -68,6 +68,17 @@ export const loginUserController = async (req: Request, res: Response) => {
             console.warn('Login failed: Invalid credentials');
             return res.status(401).json({ message: 'Invalid credentials' });
         }
+
+    
+        const userData = {
+            id: user.id,
+            email: user.email,
+            role: user.role,
+            name: user.name
+            ,
+            gender : user.gender
+        };
+
         const token = jwt.sign(
             { userId: user.id, email: user.email, role: user.role },
             JWT_SECRET,
@@ -75,7 +86,10 @@ export const loginUserController = async (req: Request, res: Response) => {
         );
         
         console.log('User logged in successfully:', user.email);
-        res.json({ token });
+        res.json({ 
+            token, 
+            user: userData // Include user data in the response
+        });
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).send('Error during login');
@@ -100,8 +114,9 @@ export const updateUserController = async (req: Request, res: Response) => {
     console.log('PUT /users/:userId request received with params:', req.params, 'and body:', req.body);
     const { userId } = req.params;
     const { name, email, password, gender } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
     try {
-        const updatedUser = await updateUser(Number(userId), name, email, password, gender);
+        const updatedUser = await updateUser(Number(userId), name, email, hashedPassword, gender);
         updatedUser ? res.json(updatedUser) : res.status(404).send('User not found');
     } catch (error) {
         console.error('Error updating user:', error);

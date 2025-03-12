@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import csurf from 'csurf';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import cors from 'cors'; // Import the cors package
+import cors from 'cors'; 
 
 dotenv.config();
 
@@ -12,8 +12,8 @@ const app = express();
 
 // Enable CORS for all routes
 app.use(cors({
-  origin: 'http://localhost:5173', // Allow requests from this origin
-  credentials: true, // Allow cookies and credentials
+  origin: 'http://localhost:5173', 
+  credentials: true, 
 }));
 
 app.use(bodyParser.json());
