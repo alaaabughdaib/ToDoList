@@ -32,15 +32,24 @@ export const getUsersController = async (req: Request, res: Response) => {
 export const createUserController = async (req: Request, res: Response) => {
     console.log('POST /users request received with body:', req.body);
     const { name, email, password, gender } = req.body;
+
     try {
+        // Check if the email is already registered
+        const existingUser = await getUserByEmail(email);
+        if (existingUser) {
+            return res.status(400).json({ message: 'Email is already in use' });
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await createUser(name, email, hashedPassword, gender);
+
         res.status(201).json(newUser);
     } catch (error) {
         console.error('Error creating user:', error);
         res.status(500).send('Error creating user');
     }
 };
+
 
 // User login
 export const loginUserController = async (req: Request, res: Response) => {

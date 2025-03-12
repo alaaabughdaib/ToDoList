@@ -4,10 +4,17 @@ import cookieParser from 'cookie-parser';
 import csurf from 'csurf';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+import cors from 'cors'; // Import the cors package
 
 dotenv.config();
 
 const app = express();
+
+// Enable CORS for all routes
+app.use(cors({
+  origin: 'http://localhost:5173', // Allow requests from this origin
+  credentials: true, // Allow cookies and credentials
+}));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -16,23 +23,22 @@ const csrfProtection = csurf({
   cookie: {
     httpOnly: true,
     sameSite: 'strict',
-    secure: process.env.NODE_ENV === 'production'
-  }
+    secure: process.env.NODE_ENV === 'production',
+  },
 });
 
 app.get('/csrf-token', csrfProtection, (req, res) => {
   res.json({ csrfToken: req.csrfToken() });
 });
 
-
 export const authenticateToken = (req: any, res: any, next: any) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-  
+
   if (!token) {
     return res.status(401).json({ error: 'Access denied, token missing' });
   }
-  
+
   jwt.verify(token, process.env.JWT_SECRET!, (err: any, user: any) => {
     if (err) {
       return res.status(403).json({ error: 'Invalid token' });
@@ -41,7 +47,6 @@ export const authenticateToken = (req: any, res: any, next: any) => {
     next();
   });
 };
-
 
 import usersRoutes from './routes/usersRoutes';
 import tasksRoutes from './routes/tasksRoutes';
