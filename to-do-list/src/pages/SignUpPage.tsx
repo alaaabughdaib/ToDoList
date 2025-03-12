@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/SignUpPage.css';
 
@@ -9,35 +9,90 @@ const SignUpPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [gender, setGender] = useState('');
   const [error, setError] = useState('');
+  const [csrfToken, setCsrfToken] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/csrf-token', {
+          method: 'GET',
+          credentials: 'include', 
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch CSRF token');
+        }
+
+        const data = await response.json();
+        setCsrfToken(data.csrfToken);
+        console.log('CSRF Token fetched:', data.csrfToken);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error('Error fetching CSRF token:', error.message);
+        } else {
+          console.error('Unknown error occurred:', error);
+        }
+      }
+    };
+
+    fetchCsrfToken();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    
+
     if (!name || !email || !password || !confirmPassword || !gender) {
       setError('Please fill in all fields.');
       return;
     }
 
-   
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
       return;
     }
 
-    
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Gender:', gender);
-    setError(''); 
-    navigate('/signin'); 
+
+    const userData = {
+      name,
+      email,
+      password,
+      gender,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrfToken, 
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Registration failed');
+      }
+
+      console.log('User registered successfully');
+      setError('');
+      navigate('/signin'); 
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('An unknown error occurred.');
+      }
+    }
   };
 
   return (
     <div className="signup-page">
-   
       <div className="background-signup"></div>
       <div className="signup-container">
         <div className="signup-box">

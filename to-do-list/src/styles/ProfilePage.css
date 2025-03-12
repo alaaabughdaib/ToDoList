@@ -1,0 +1,144 @@
+.background-profile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/images/profile.svg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+  
+  .profile-page {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .profile-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+  }
+  
+  .profile-box {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 3px solid #a46c8c46;
+    width: 100%;
+  }
+  
+  .profile-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #a46c8c !important;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  
+  .profile-info {
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+  
+  .profile-info p {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: #555;
+  }
+  
+  .profile-info strong {
+    color: #a46c8c;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #a46c8c;
+    outline: none;
+  }
+  
+  .edit-button,
+  .save-button,
+  .cancel-button,
+  .sign-out-button {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-button {
+    background-color: #a46c8c;
+    color: white;
+  }
+  
+  .edit-button:hover {
+    background-color: #8a5a72;
+  }
+  
+  .save-button {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .save-button:hover {
+    background-color: #45a049;
+  }
+  
+  .cancel-button {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .cancel-button:hover {
+    background-color: #e53935;
+  }
+  
+  .sign-out-button {
+    background-color: #555;
+    color: white;
+  }
+  
+  .sign-out-button:hover {
+    background-color: #444;
+  }
+  
+  .error {
+    color: #ff4d4d;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
