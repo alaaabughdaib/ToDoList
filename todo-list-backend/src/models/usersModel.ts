@@ -6,7 +6,9 @@ export interface User {
     email: string;
     password: string;
     gender: string;
+    role: string;
 }
+
 
 // Get user by email
 export const getUserByEmail = async (email: string): Promise<User | null> => {

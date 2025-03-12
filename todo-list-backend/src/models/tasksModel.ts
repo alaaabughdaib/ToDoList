@@ -14,7 +14,6 @@ export const createTask = async (title: string, description: string, userId: num
   return result.rows[0];
 };
 
-
 export const updateTask = async (taskId: number, title: string, description: string) => {
   const result = await pool.query(
     `UPDATE public."Tasks"
@@ -26,7 +25,6 @@ export const updateTask = async (taskId: number, title: string, description: str
   return result.rows[0];
 };
 
-
 export const deleteTask = async (taskId: number) => {
   const result = await pool.query(
     `DELETE FROM public."Tasks"
@@ -34,5 +32,5 @@ export const deleteTask = async (taskId: number) => {
      RETURNING *`,
     [taskId]
   );
-  return result.rows[0]; 
+  return result.rows[0];
 };
