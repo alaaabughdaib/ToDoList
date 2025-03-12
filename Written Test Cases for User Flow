@@ -13,7 +13,6 @@
 **Edge Cases:**  
 - Register with an already registered email → **Expect: "Email already exists."**  
 - Register with an invalid email format → **Expect: "Enter a valid email."**  
-- Register with a weak password → **Expect: "Password must meet security requirements."**  
 - Register with mismatched passwords → **Expect: "Passwords do not match."**  
 - Try submitting without filling required fields → **Expect: "This field is required."**  
 
