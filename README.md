@@ -43,7 +43,7 @@ main-branch/
 
 ### 1. Clone the repository
 
-git clone https://github.com/your-username/todo-list.git
+git clone repo-url
 cd todo-list
 ```
 
