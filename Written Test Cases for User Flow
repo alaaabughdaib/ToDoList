@@ -1,0 +1,97 @@
+### **Written Test Cases for User Flow**  
+
+---
+
+### **1. User Registration**  
+**Scenario:** A new user registers for an account.  
+- **Given** the user is on the **Sign-Up** page.  
+- **When** they enter a **valid Name, Email, Gender, Password, and Confirm Password** fields.  
+- **And** they click the **Sign-Up** button.  
+- **Then** the system should successfully create an account.  
+- **And** the user should receive a confirmation message or be redirected to the **Login** page.  
+
+**Edge Cases:**  
+- Register with an already registered email → **Expect: "Email already exists."**  
+- Register with an invalid email format → **Expect: "Enter a valid email."**  
+- Register with a weak password → **Expect: "Password must meet security requirements."**  
+- Register with mismatched passwords → **Expect: "Passwords do not match."**  
+- Try submitting without filling required fields → **Expect: "This field is required."**  
+
+---
+
+### **2. User Login**  
+**Scenario:** A registered user logs into their account.  
+- **Given** the user is on the **Login** page.  
+- **When** they enter a **valid email and password**.  
+- **And** they click the **Login** button.  
+- **Then** the system should authenticate the user and redirect them to the **To-Do List dashboard**.  
+
+**Edge Cases:**  
+- Incorrect email or password → **Expect: "Invalid credentials."**  
+- Unregistered email → **Expect: "User not found."**  
+- Empty credentials → **Expect: "Email and password are required."**  
+- JWT token expired → **Expect: "Session expired, please log in again."**  
+
+---
+
+### **3. Edit Profile**  
+**Scenario:** A logged-in user wants to update their profile information.  
+- **Given** the user is on the **Edit Profile** page.  
+- **When** they update fields like **Name, Email, Password, or Gender**.  
+- **And** they click the **Save Changes** button.  
+- **Then** the system should update their profile details and show a success message.  
+
+**Edge Cases:**  
+- Enter an email already used by another user → **Expect: "Email is already in use."**  
+- Enter an invalid email format → **Expect: "Enter a valid email."**  
+- Try submitting without making any changes → **Expect: "No changes detected."**  
+- Try changing password but confirm password doesn’t match → **Expect: "Passwords do not match."**  
+
+---
+
+### **4. Add a Task**  
+**Scenario:** A logged-in user wants to create a new task.  
+- **Given** the user is on the **Task Page**.  
+- **When** they enter a **task description**.  
+- **And** they click the **Add Task** button.  
+- **Then** the task should be added to the list and displayed on the page.  
+
+**Edge Cases:**  
+- Try adding a task without a description → **Expect: "Task description is required."**  
+- Try adding an excessively long task description → **Expect: "Task description is too long."**  
+
+---
+
+### **5. Edit a Task**  
+**Scenario:** A logged-in user wants to update an existing task.  
+- **Given** the user is on the **Task Page**.  
+- **When** they click the **Edit** button on a task.  
+- **And** they update the **task description**.  
+- **Then** the system should save the changes and display the updated task.  
+
+**Edge Cases:**  
+- Try saving an empty task description → **Expect: "Task description cannot be empty."**  
+
+---
+
+### **6. Delete a Task**  
+**Scenario:** A logged-in user wants to delete a task.  
+- **Given** the user is on the **Task Page**.  
+- **When** they click the **Delete** button on a task.  
+- **Then** the system should prompt for confirmation.  
+- **And** if the user confirms, the task should be removed from the list.  
+
+**Edge Cases:**  
+- Try deleting a task and refreshing the page → **Expect: The task should no longer exist in the database.**  
+- Try deleting a task that was already removed → **Expect: "Task not found."**  
+
+---
+
+### **7. Logout**  
+**Scenario:** A logged-in user wants to log out of the system.  
+- **Given** the user is logged in.  
+- **When** they click the **Logout** button.  
+- **Then** their session should be cleared, and they should be redirected to the **Login** page.  
+
+**Edge Cases:**  
+- Try accessing the dashboard after logging out → **Expect: Redirected to login page with "Session expired."**  
